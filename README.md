@@ -1,4 +1,4 @@
-TERRAFORM AWS LAB – MODULAR, MULTI-ENVIRONMENT INFRASTRCUTURE
+TERRAWS1– MODULAR, MULTI-ENVIRONMENT INFRASTRCUTURE
 
 This project automates the deployment of a complete AWS infrastructure using Terraform, modular IaC design, and GitHub Actions. It provisions VPC networking, public/private subnets, security groups, Linux EC2 instances, and monitoring components — all deployed through a secure, environment‑aware CI/CD pipeline.
 
@@ -225,6 +225,7 @@ modules/
 .gitignore
 
 README.md
+
 
 
 
