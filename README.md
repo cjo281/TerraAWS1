@@ -1,9 +1,12 @@
 TERRAFORM AWS LAB – MODULAR, MULTI-ENVIRONMENT INFRASTRCUTURE
+
 This project automates the deployment of a complete AWS infrastructure using Terraform, modular IaC design, and GitHub Actions. It provisions VPC networking, public/private subnets, security groups, Linux EC2 instances, and monitoring components — all deployed through a secure, environment‑aware CI/CD pipeline.
 
 PROJECT OVERVIEW
+
 This repository follows a multi‑environment Terraform architecture, separating staging and production deployments while sharing reusable modules.
 The design emphasizes:
+
 • 	Infrastructure modularity
 • 	Environment isolation
 • 	Remote state management (S3 + DynamoDB)
@@ -12,10 +15,12 @@ The design emphasizes:
 • 	Clean, scalable Terraform structure
 
 TERRAFORM MODULES
+
 The infrastructure is broken into three core modules:
 
 1. Networking Module (modules/networking)
 Creates all network‑related resources:
+
 - VPC
 - Public subnet
 - Private subnet
@@ -36,6 +41,7 @@ Deploys compute resources:
 Instances are fully parameterized and environment‑aware.
 
 3. Monitoring Module (modules/monitoring)
+   
 Provides observability components:
 - CloudWatch Log Groups
 - Instance‑level monitoring configuration
@@ -81,6 +87,7 @@ All workflows are located in
 .github/workflows/deploy.yml
 
 Workflow: deploy.yml
+
 Purpose:
 Primary Terraform deployment pipeline for both staging and production.
 Features:
@@ -103,40 +110,62 @@ AWS_REGION
 These credentials allow GitHub Actions to authenticate to AWS and run Terraform commands.
 
 FILE STRUCTURE
+
 .github/workflows/
+
   deploy.yml
 
 environments/
+
   staging/
+  
     backend.tf
+    
     main.tf
+    
     variables.tf
+    
     staging.tfvars
 
   production/
     backend.tf
+    
     main.tf
+    
     variables.tf
+    
     production.tfvars
 
 modules/
+
   networking/
+  
     main.tf
+    
     variables.tf
+    
     outputs.tf
 
   compute/
+  
     main.tf
+    
     variables.tf
+    
     outputs.tf
 
   monitoring/
+  
     main.tf
+    
     variables.tf
+    
     outputs.tf
 
 .gitignore
+
 README.md
+
 
 
 
