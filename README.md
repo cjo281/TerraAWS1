@@ -8,10 +8,15 @@ This repository follows a multi‑environment Terraform architecture, separating
 The design emphasizes:
 
 • 	Infrastructure modularity
+
 • 	Environment isolation
+
 • 	Remote state management (S3 + DynamoDB)
+
 • 	CI/CD automation via GitHub Actions
+
 • 	Reproducible deployments
+
 • 	Clean, scalable Terraform structure
 
 TERRAFORM MODULES
@@ -31,14 +36,21 @@ Creates all network‑related resources:
 This module defines the entire network topology for both environments.
 
 2. Compute Module (modules/compute)
-3. 
-Deploys compute resources:
+   
+   Deploys compute resources:
+   
 - Frontend EC2 instance
+  
 - Backend EC2 instance
+  
 - Elastic IP for frontend
+  
 - Network Interfaces
+  
 - Security group attachments
+  
 - Key pair reference (key_name)
+  
 Instances are fully parameterized and environment‑aware.
 
 3. Monitoring Module (modules/monitoring)
@@ -46,13 +58,17 @@ Instances are fully parameterized and environment‑aware.
 Provides observability components:
 
 - CloudWatch Log Groups
+  
 - Instance‑level monitoring configuration
+  
 - Extension point for alarms and dashboards
+  
 This module keeps monitoring decoupled and reusable.
 
 ENVIRONMENT STRUCTURE
 
 Each environment has its own folder under environments/:
+
 Staging
 environments/staging/
 
@@ -76,11 +92,17 @@ environments/production/
   production.tfvars
 
   Each environment includes:
+  
 • 	Its own remote backend (S3 bucket + DynamoDB lock table)
+
 • 	Its own variable definitions
+
 • 	Its own tfvars file
+
 • 	Its own state file stored remotely
+
 • 	Complete isolation between staging and production
+
 This ensures safe testing, promotion, and rollback workflows.
 
 REMOTE BACKEND (AWS S3 + DynamoDB)
@@ -88,13 +110,17 @@ REMOTE BACKEND (AWS S3 + DynamoDB)
 Both environments use:
 
 • 	S3 bucket for Terraform state
+
 • 	DynamoDB table for state locking
 
 This enables:
 
 • 	Team‑safe deployments
+
 • 	CI/CD‑safe deployments
+
 • 	No local state files
+
 • 	Automatic locking during apply
 
 GITHUB ACTIONS WORKFLOW
@@ -112,11 +138,17 @@ Primary Terraform deployment pipeline for both staging and production.
 Features:
 
   - Manual environment selection (workflow_dispatch)
+    
   - AWS authentication using GitHub Secrets
+    
   - Terraform init → validate → plan → apply
+    
   - Environment‑specific backend + variable loading
+    
   - Plan summary output
+    
   - Safe, idempotent applies
+    
   - Clean working directory handling
 
 SECRETS REQUIRED
@@ -193,6 +225,7 @@ modules/
 .gitignore
 
 README.md
+
 
 
 
