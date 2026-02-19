@@ -1,3 +1,7 @@
+###############################################
+# MONITORING MODULE — VARIABLES
+###############################################
+
 variable "log_group_name" {
   type        = string
   description = "CloudWatch Log Group name"

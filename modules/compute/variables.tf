@@ -1,3 +1,9 @@
+###############################################
+# COMPUTE MODULE — VARIABLES
+# These variables allow the compute module to
+# receive networking outputs and environment settings.
+###############################################
+
 variable "vpc_id" {
   type = string
 }

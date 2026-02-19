@@ -1,3 +1,9 @@
+###############################################
+# NETWORKING MODULE — OUTPUTS
+# These outputs expose networking resources
+# to other modules (compute, monitoring).
+###############################################
+
 output "vpc_id" {
   value       = aws_vpc.main.id
   description = "VPC ID"

@@ -1,17 +1,46 @@
+
+###############################################################
+# STAGING ENVIRONMENT — MAIN CONFIGURATION
+# This file wires together:
+# - AWS provider
+# - Networking module
+# - Compute module
+# - Monitoring module
+###############################################################
+
+
+# -------------------------
+# AWS Provider
+# -------------------------
+
 provider "aws" {
-  region = var.region
+  region = var.region                                   # Region passed from staging.tfvars
 }
 
-# Networking
+# -------------------------
+# NETWORKING MODULE
+# Creates:
+# - VPC
+# - Public + private subnets
+# - Route table + IGW
+# - Security groups
+# -------------------------
+
 module "networking" {
   source                = "../../modules/networking"
   vpc_cidr_block        = var.vpc_cidr_block
   public_subnet_cidr    = var.public_subnet_cidr
   private_subnet_cidr   = var.private_subnet_cidr
-  tags                  = var.tags
+  tags                  = var.tags                      # Common tags for all resources
 }
 
-# Compute
+# -------------------------
+# COMPUTE MODULE
+# Deploys:
+# - Frontend EC2 (public subnet)
+# - Backend EC2 (private subnet)
+# -------------------------
+
 module "compute" {
   source              = "../../modules/compute"
   vpc_id              = module.networking.vpc_id
@@ -26,7 +55,12 @@ module "compute" {
   tags                = var.tags
 }
 
-# Monitoring
+# -------------------------
+# MONITORING MODULE
+# Creates:
+# - CloudWatch Log Group
+# -------------------------
+
 module "monitoring" {
   source          = "../../modules/monitoring"
   log_group_name  = var.log_group_name

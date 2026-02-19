@@ -1,3 +1,9 @@
+###############################################
+# COMPUTE MODULE — OUTPUTS
+# These outputs expose EC2 instance details
+# to the environment or other modules.
+###############################################
+
 output "frontend_instance_id" {
   value       = aws_instance.frontend.id
   description = "Frontend EC2 instance ID"

@@ -1,3 +1,8 @@
+###############################################################
+# STAGING ENVIRONMENT — VARIABLES
+# These variables are populated by staging.tfvars
+###############################################################
+
 variable "region" {
   description = "AWS region"
   type        = string

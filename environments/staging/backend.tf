@@ -1,9 +1,21 @@
+###############################################################
+# TERRAFORM REMOTE BACKEND (STAGING)
+# Stores Terraform state in:
+# - S3 bucket (state file)
+# - DynamoDB table (state locking)
+#
+# This ensures:
+# - No local state files
+# - Safe concurrent operations
+# - CI/CD compatibility
+###############################################################
+
 terraform {
   backend "s3" {
     bucket         = "tfstate-car-lab"        #  S3 bucket you just created
-    key            = "staging/terraform.tfstate"  #path/name of the state file inside the bucke
-    region         = "us-east-1"              #same region as the bucket
-    dynamodb_table = "tfstate-locks"          # create manually in DynamoDB
-    encrypt        = true
+    key            = "staging/terraform.tfstate" # Path to state file inside the bucket
+    region         = "us-east-1"              # Region where the bucket exists
+    dynamodb_table = "tfstate-locks"          # DynamoDB table for state locking
+    encrypt        = true                     # Encrypt state at rest
   }
 }
